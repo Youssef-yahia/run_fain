@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                   top: fainRect.top,
                   width: fainRect.width,
                   height: fainRect.height,
-                  child: Transform.scale(child: fain.render(), scale: 2),
+                  child: Transform.scale(child: fain.render(), scale: 1),
                 );
               })
         ],
