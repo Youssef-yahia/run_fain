@@ -6,20 +6,20 @@ import 'package:ourgame/sprite.dart';
 List<Sprite> fain = [
   Sprite()
     ..imagePath = "assets/fain/fain.jpg"
-    ..imageWidth = 200
-    ..imageHeight = 207,
+    ..imageWidth = 88
+    ..imageHeight = 94,
   Sprite()
     ..imagePath = "assets/fain/fain.jpg"
-    ..imageWidth = 200
-    ..imageHeight = 207,
+    ..imageWidth = 88
+    ..imageHeight = 94,
   Sprite()
     ..imagePath = "assets/fain/fain.jpg"
-    ..imageWidth = 200
-    ..imageHeight = 207,
+    ..imageWidth = 88
+    ..imageHeight = 94,
   Sprite()
     ..imagePath = "assets/fain/fain.jpg"
-    ..imageWidth = 200
-    ..imageHeight = 207,
+    ..imageWidth = 88
+    ..imageHeight = 94,
 ];
 
 class Fain extends GameObject {
