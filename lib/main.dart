@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   double runDistance = 0;
 
   late AnimationController worldController;
-  Duration lastUpdateCall = Duration();
+  Duration? lastUpdateCall = Duration();
 
   @override
   void initState() {
@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
   // called everytime AnimationController ticks
   _update() {
-    fain.update(lastUpdateCall, worldController.lastElapsedDuration);
+    fain.update(lastUpdateCall!, worldController.lastElapsedDuration);
     lastUpdateCall = worldController.lastElapsedDuration;
   }
 
