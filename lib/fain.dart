@@ -51,7 +51,7 @@ class Fain extends GameObject {
 
   late List<Sprite> fains = [];
 
-  late Sprite currentSprite;
+  Sprite? currentSprite;
   @override
   Widget render() {
     return Image.asset(currentSprite.imagePath);
