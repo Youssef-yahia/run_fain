@@ -3,18 +3,38 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:ourgame/sprite.dart';
 
-Sprite fain = Sprite()
-  ..imagePath = "assets/fain/fain.jpg"
-  ..imageWidth = 88
-  ..imageHeight = 94;
+List<Sprite> fain = [
+  Sprite()
+    ..imagePath = "assets/fain/fain.jpg"
+    ..imageWidth = 88
+    ..imageHeight = 94,
+  Sprite()
+    ..imagePath = "assets/fain/fain.jpg"
+    ..imageWidth = 88
+    ..imageHeight = 94,
+  Sprite()
+    ..imagePath = "assets/fain/fain.jpg"
+    ..imageWidth = 88
+    ..imageHeight = 94,
+  Sprite()
+    ..imagePath = "assets/fain/fain.jpg"
+    ..imageWidth = 88
+    ..imageHeight = 94,
+];
 
 class Fain extends GameObject {
+  Sprite currentSprite = fain[0];
   @override
   Widget render() {
-    return Image.asset(fain.imagePath);
+    return Image.asset(currentSprite.imagePath);
   }
 
   Rect getRect(Size screenSize, double runDistance) {
-    return Rect.fromLTWH(screenSize.width / 10, screenSize.height / 2 - fain.imageHeight, fain.imageWidth.toDouble(), fain.imageHeight.toDouble());
+    return Rect.fromLTWH(screenSize.width / 10, screenSize.height / 2 - currentSprite.imageHeight, currentSprite.imageWidth.toDouble(), currentSprite.imageHeight.toDouble());
+  }
+
+  @override
+  void update(Duration lastTime, Duration currentTime) {
+    currentSprite = fain[(currentTime.inMilliseconds / 100).floor() % 2 + 2];
   }
 }
