@@ -1,25 +1,41 @@
-import 'package:ourgame/gameObject.dart';
+import 'package:ourgame/game_object.dart';
 import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:ourgame/sprite.dart';
 
 List<Sprite> fain = [
   Sprite()
-    ..imagePath = "assets/fain/fain.jpg"
-    ..imageWidth = 88
-    ..imageHeight = 94,
+    ..imagePath = "assets/meow/run/meow1.png"
+    ..imageWidth = 96
+    ..imageHeight = 96,
   Sprite()
-    ..imagePath = "assets/fain/fain.jpg"
-    ..imageWidth = 88
-    ..imageHeight = 94,
+    ..imagePath = "assets/meow/run/meow2.png"
+    ..imageWidth = 96
+    ..imageHeight = 96,
   Sprite()
-    ..imagePath = "assets/fain/fain.jpg"
-    ..imageWidth = 88
-    ..imageHeight = 94,
+    ..imagePath = "assets/meow/run/meow3.png"
+    ..imageWidth = 96
+    ..imageHeight = 96,
   Sprite()
-    ..imagePath = "assets/fain/fain.jpg"
-    ..imageWidth = 88
-    ..imageHeight = 94,
+    ..imagePath = "assets/meow/run/meow4.png"
+    ..imageWidth = 96
+    ..imageHeight = 96,
+  Sprite()
+    ..imagePath = "assets/meow/run/meow5.png"
+    ..imageWidth = 96
+    ..imageHeight = 96,
+  Sprite()
+    ..imagePath = "assets/meow/run/meow6.png"
+    ..imageWidth = 96
+    ..imageHeight = 96,
+  Sprite()
+    ..imagePath = "assets/meow/run/meow7.png"
+    ..imageWidth = 96
+    ..imageHeight = 96,
+  Sprite()
+    ..imagePath = "assets/meow/run/meow8.png"
+    ..imageWidth = 96
+    ..imageHeight = 96,
 ];
 
 class Fain extends GameObject {
