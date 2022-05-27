@@ -3,16 +3,6 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:ourgame/sprite.dart';
 
-fain() {
-  for (int i = 1; i <= 8; i++) {
-    fains.add(Sprite()
-      ..imagePath = "assets/meow/run/meow$i.png"
-      ..imageWidth = 96
-      ..imageHeight = 96);
-  }
-}
-
-List<Sprite> fains = [];
 // List<Sprite> fain = [
 //   Sprite()
 //     ..imagePath = "assets/meow/run/meow1.png"
@@ -49,7 +39,19 @@ List<Sprite> fains = [];
 // ];
 
 class Fain extends GameObject {
-  Sprite currentSprite = fains[0];
+  Fain() {
+    for (int i = 1; i <= 8; i++) {
+      fains.add(Sprite()
+        ..imagePath = "assets/meow/run/meow$i.png"
+        ..imageWidth = 96
+        ..imageHeight = 96);
+    }
+    currentSprite = fains[0];
+  }
+
+  late List<Sprite> fains = [];
+
+  late Sprite currentSprite;
   @override
   Widget render() {
     return Image.asset(currentSprite.imagePath);
