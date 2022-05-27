@@ -51,6 +51,6 @@ class Fain extends GameObject {
 
   @override
   void update(Duration lastTime, Duration currentTime) {
-    currentSprite = fain[(currentTime.inMilliseconds / 100).floor() % 2 + 2];
+    currentSprite = fain[(currentTime.inMilliseconds / 100).floor() % 8 + 8];
   }
 }
