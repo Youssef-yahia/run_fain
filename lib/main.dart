@@ -28,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Dodge dodge = Dodge();
+  Fain fain = Fain();
   double runDistance = 0;
 
   @override
@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    Rect dodgeRect = dodge.getRect(screenSize, runDistance);
+    Rect fainRect = fain.getRect(screenSize, runDistance);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -48,11 +48,11 @@ class _MyHomePageState extends State<MyHomePage> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            left: dodgeRect.left,
-            top: dodgeRect.top,
-            width: dodgeRect.width,
-            height: dodgeRect.height,
-            child: dodge.render(),
+            left: fainRect.left,
+            top: fainRect.top,
+            width: fainRect.width,
+            height: fainRect.height,
+            child: fain.render(),
           )
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
