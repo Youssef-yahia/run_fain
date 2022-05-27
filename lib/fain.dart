@@ -49,16 +49,16 @@ class Fain extends GameObject {
     currentSprite = fains[0];
   }
 
-  late List<Sprite> fains = [];
+  List<Sprite> fains = [];
 
   Sprite? currentSprite;
   @override
   Widget render() {
-    return Image.asset(currentSprite.imagePath);
+    return Image.asset(currentSprite!.imagePath);
   }
 
   Rect getRect(Size screenSize, double runDistance) {
-    return Rect.fromLTWH(screenSize.width / 10, screenSize.height / 2 - currentSprite.imageHeight, currentSprite.imageWidth.toDouble(), currentSprite.imageHeight.toDouble());
+    return Rect.fromLTWH(screenSize.width / 10, screenSize.height / 2 - currentSprite!.imageHeight, currentSprite!.imageWidth.toDouble(), currentSprite!.imageHeight.toDouble());
   }
 
   @override
