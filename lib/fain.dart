@@ -7,7 +7,7 @@ class Fain extends GameObject {
   Fain() {
     for (int i = 1; i <= 8; i++) {
       fains.add(Sprite()
-        ..imagePath = "assets/meow/run/meow$i.png"
+        ..imagePath = "assets/meow/dodge/meow$i.png"
         ..imageWidth = 96
         ..imageHeight = 96);
     }
