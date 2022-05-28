@@ -12,15 +12,23 @@ enum FainState {
 class Fain extends GameObject {
   Fain() {
     for (int i = 1; i <= 8; i++) {
-      fains.add(Sprite()
+      fainRunning.add(Sprite()
         ..imagePath = "assets/meow/run/meow$i.png"
         ..imageWidth = 96
         ..imageHeight = 96);
     }
-    currentSprite = fains[0];
+    for (int i = 1; i <= 8; i++) {
+      fainJumping.add(Sprite()
+        ..imagePath = "assets/meow/jump/meow$i.png"
+        ..imageWidth = 96
+        ..imageHeight = 96);
+    }
+
+    currentSprite = fainRunning[0];
   }
 
-  List<Sprite> fains = [];
+  List<Sprite> fainRunning = [];
+  List<Sprite> fainJumping = [];
   Sprite? currentSprite;
   double dispY = 0;
   double velY = 0;
@@ -37,7 +45,12 @@ class Fain extends GameObject {
 
   @override
   void update(Duration lastTime, Duration currentTime) {
-    currentSprite = fains[(currentTime.inMilliseconds / 100).floor() % 8];
+    if (state == FainState.running) {
+      currentSprite = fainRunning[(currentTime.inMilliseconds / 100).floor() % 8];
+    }
+    if (state == FainState.jumping) {
+      currentSprite = fainJumping[(currentTime.inMilliseconds / 100).floor() % 8];
+    }
 
     double elapsedTimeSeconds = (currentTime - lastTime).inMilliseconds / 1000;
     dispY += velY * elapsedTimeSeconds;
