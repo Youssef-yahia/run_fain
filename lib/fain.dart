@@ -49,7 +49,7 @@ class Fain extends GameObject {
       currentSprite = fainRunning[(currentTime.inMilliseconds / 100).floor() % 8];
     }
     if (state == FainState.jumping) {
-      currentSprite = fainJumping[(currentTime.inMilliseconds / 100).floor() % 8];
+      currentSprite = fainJumping[(currentTime.inMilliseconds / 100).floor() % 12];
     }
 
     double elapsedTimeSeconds = (currentTime - lastTime).inMilliseconds / 1000;
