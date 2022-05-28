@@ -1,7 +1,13 @@
+import 'package:ourgame/constants.dart';
 import 'package:ourgame/game_object.dart';
 import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:ourgame/sprite.dart';
+
+enum FainState {
+  jumping,
+  running,
+}
 
 class Fain extends GameObject {
   Fain() {
@@ -16,6 +22,9 @@ class Fain extends GameObject {
 
   List<Sprite> fains = [];
   Sprite? currentSprite;
+  double dispY = 0;
+  double velY = 0;
+  FainState state = FainState.running;
 
   @override
   Widget render() {
@@ -23,11 +32,28 @@ class Fain extends GameObject {
   }
 
   Rect getRect(Size screenSize, double runDistance) {
-    return Rect.fromLTWH(screenSize.width / 10, screenSize.height / 2 - currentSprite!.imageHeight, currentSprite!.imageWidth.toDouble(), currentSprite!.imageHeight.toDouble());
+    return Rect.fromLTWH(screenSize.width / 10, screenSize.height / 2 - currentSprite!.imageHeight - dispY, currentSprite!.imageWidth.toDouble(), currentSprite!.imageHeight.toDouble());
   }
 
   @override
   void update(Duration lastTime, Duration currentTime) {
     currentSprite = fains[(currentTime.inMilliseconds / 100).floor() % 8];
+
+    double elapsedTimeSeconds = (currentTime - lastTime).inMilliseconds / 1000;
+    dispY += velY * elapsedTimeSeconds;
+    if (dispY <= 0) {
+      dispY = 0;
+      velY = 0;
+      state = FainState.running;
+    } else {
+      velY -= GRAVITY_PPSS * elapsedTimeSeconds;
+    }
+  }
+
+  void jump() {
+    if (state != FainState.jumping) {
+      state = FainState.jumping;
+    }
+    velY = 650;
   }
 }

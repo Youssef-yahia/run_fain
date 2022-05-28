@@ -51,27 +51,33 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    Rect fainRect = fain.getRect(screenSize, runDistance);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          AnimatedBuilder(
-              animation: worldController,
-              builder: (context, _) {
-                return Positioned(
-                  left: fainRect.left,
-                  top: fainRect.top,
-                  width: fainRect.width,
-                  height: fainRect.height,
-                  child: fain.render(),
-                );
-              })
-        ],
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            fain.jump();
+          },
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              AnimatedBuilder(
+                  animation: worldController,
+                  builder: (context, _) {
+                    Rect fainRect = fain.getRect(screenSize, runDistance);
+                    return Positioned(
+                      left: fainRect.left,
+                      top: fainRect.top,
+                      width: fainRect.width,
+                      height: fainRect.height,
+                      child: fain.render(),
+                    );
+                  })
+            ],
+          ),
+        ) // This trailing comma makes auto-formatting nicer for build methods.
+        );
   }
 }
