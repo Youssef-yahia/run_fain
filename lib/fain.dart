@@ -17,7 +17,7 @@ class Fain extends GameObject {
         ..imageWidth = 96
         ..imageHeight = 96);
     }
-    for (int i = 1; i <= 8; i++) {
+    for (int i = 1; i <= 12; i++) {
       fainJumping.add(Sprite()
         ..imagePath = "assets/meow/jump/meow$i.png"
         ..imageWidth = 96
