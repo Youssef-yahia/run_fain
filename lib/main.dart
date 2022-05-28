@@ -27,7 +27,8 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   Fain fain = Fain();
   double runDistance = 0;
 
@@ -37,14 +38,16 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-    worldController = AnimationController(vsync: this, duration: Duration(days: 99));
+    worldController =
+        AnimationController(vsync: this, duration: Duration(days: 99));
     worldController.addListener(_update);
     worldController.forward();
   }
 
   // called everytime AnimationController ticks
   _update() {
-    fain.update(lastUpdateCall!, worldController.lastElapsedDuration!);
+    fain.update(worldController.lastElapsedDuration! - lastUpdateCall!,
+        worldController.lastElapsedDuration!);
     lastUpdateCall = worldController.lastElapsedDuration;
   }
 

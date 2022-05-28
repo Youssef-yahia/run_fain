@@ -48,6 +48,9 @@ flutter:
      - assets/meow/run/
      - assets/meow/idle/
      - assets/meow/jump/
+     - assets/meow2/idle/
+     - assets/meow2/run/
+     - assets/meow2/jump/
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
