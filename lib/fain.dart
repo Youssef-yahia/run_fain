@@ -52,8 +52,8 @@ class Fain extends GameObject {
 
   void jump() {
     if (state != FainState.jumping) {
-      //state = FainState.jumping;
+      state = FainState.jumping;
+      velY = 650;
     }
-    velY = 650;
   }
 }
