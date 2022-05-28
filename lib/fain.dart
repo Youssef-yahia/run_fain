@@ -44,7 +44,7 @@ class Fain extends GameObject {
     if (dispY <= 0) {
       dispY = 0;
       velY = 0;
-      state = FainState.running;
+      //state = FainState.running;
     } else {
       velY -= GRAVITY_PPSS * elapsedTimeSeconds;
     }
