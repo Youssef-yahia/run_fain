@@ -7,11 +7,13 @@ import 'package:ourgame/animation.dart';
 enum FainState {
   jumping,
   running,
+  dead,
 }
 
 class Fain extends GameObject {
   final int RUN = 0;
   final int JUMP = 1;
+  final int DEAD = 2;
 
   List<Animation2D> animations = [];
 
@@ -25,9 +27,11 @@ class Fain extends GameObject {
   Fain() {
     animations.add(Animation2D("assets/meow2/run/run", 1, 4, 96, 96));
     animations.add(Animation2D("assets/meow2/jump/jump", 3, 7, 96, 96));
+    animations.add(Animation2D("assets/meow2/die/die", 1, 5, 96, 96));
 
     animations[RUN].loop = true;
     animations[JUMP].loop = false;
+    animations[DEAD].loop = false;
     animations[JUMP].speed = 0.75;
 
     currentSprite = animations[RUN].getFrame(0);
@@ -39,11 +43,7 @@ class Fain extends GameObject {
   }
 
   Rect getRect(Size screenSize, double runDistance) {
-    return Rect.fromLTWH(
-        screenSize.width / 10,
-        screenSize.height / 2 - currentSprite!.imageHeight - dispY,
-        currentSprite!.imageWidth.toDouble(),
-        currentSprite!.imageHeight.toDouble());
+    return Rect.fromLTWH(screenSize.width / 10, screenSize.height / 2 - currentSprite!.imageHeight - dispY, currentSprite!.imageWidth.toDouble(), currentSprite!.imageHeight.toDouble());
   }
 
   @override
@@ -76,6 +76,9 @@ class Fain extends GameObject {
       case FainState.jumping:
         currentAnimation = JUMP;
         break;
+      case FainState.dead:
+        currentAnimation = DEAD;
+        break;
     }
 
     currentSprite = animations[currentAnimation].getFrame(time!.inMilliseconds);
@@ -87,6 +90,14 @@ class Fain extends GameObject {
       print("GO TO JUMP");
 
       velY = 600;
+      time = Duration();
+    }
+  }
+
+  void die() {
+    if (state != FainState.dead) {
+      state = FainState.dead;
+      print("DEAD");
       time = Duration();
     }
   }

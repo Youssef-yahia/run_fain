@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:ourgame/sprite.dart';
 
 class Animation2D {

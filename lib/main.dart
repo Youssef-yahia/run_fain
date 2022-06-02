@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ourgame/fain.dart';
+import 'package:ourgame/game_object.dart';
+import 'package:ourgame/roadBlock.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,33 +29,74 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
   Fain fain = Fain();
   double runDistance = 0;
+  double runVelocity = 30;
 
   late AnimationController worldController;
   Duration? lastUpdateCall = Duration();
 
+  List<RoadBlock> roadBlocks = [
+    RoadBlock(worldLocation: Offset(200, 0))
+  ];
+
   @override
   void initState() {
     super.initState();
-    worldController =
-        AnimationController(vsync: this, duration: Duration(days: 99));
+    worldController = AnimationController(vsync: this, duration: Duration(days: 99));
     worldController.addListener(_update);
     worldController.forward();
   }
 
+  void _die() {
+    setState(() {
+      fain.die();
+      worldController.stop();
+    });
+  }
+
   // called everytime AnimationController ticks
   _update() {
-    fain.update(worldController.lastElapsedDuration! - lastUpdateCall!,
-        worldController.lastElapsedDuration!);
+    fain.update(worldController.lastElapsedDuration! - lastUpdateCall!, worldController.lastElapsedDuration!);
+    double elapsedTimeSeconds = (worldController.lastElapsedDuration! - lastUpdateCall!).inMilliseconds / 1000;
+    runDistance += runVelocity * elapsedTimeSeconds;
+
+    Size screenSize = MediaQuery.of(context).size;
+    Rect fainRect = fain.getRect(screenSize, runDistance).deflate(5);
+    for (RoadBlock roadBlock in roadBlocks) {
+      Rect obstcaleRect = roadBlock.getRect(screenSize, runDistance).deflate(5);
+      if (fainRect.overlaps(obstcaleRect)) {
+        _die();
+      }
+    }
+
     lastUpdateCall = worldController.lastElapsedDuration;
   }
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    List<Widget> children = [];
+
+    for (GameObject object in [
+      ...roadBlocks,
+      fain
+    ]) {
+      children.add(AnimatedBuilder(
+          animation: worldController,
+          builder: (context, _) {
+            Rect objectRect = object.getRect(screenSize, runDistance);
+            return Positioned(
+              left: objectRect.left,
+              top: objectRect.top,
+              width: objectRect.width,
+              height: objectRect.height,
+              child: object.render(),
+            );
+          }));
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -65,20 +108,7 @@ class _MyHomePageState extends State<MyHomePage>
           },
           child: Stack(
             alignment: Alignment.center,
-            children: [
-              AnimatedBuilder(
-                  animation: worldController,
-                  builder: (context, _) {
-                    Rect fainRect = fain.getRect(screenSize, runDistance);
-                    return Positioned(
-                      left: fainRect.left,
-                      top: fainRect.top,
-                      width: fainRect.width,
-                      height: fainRect.height,
-                      child: fain.render(),
-                    );
-                  })
-            ],
+            children: children,
           ),
         ) // This trailing comma makes auto-formatting nicer for build methods.
         );
