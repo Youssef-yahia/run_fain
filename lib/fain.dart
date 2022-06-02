@@ -98,6 +98,7 @@ class Fain extends GameObject {
     if (state != FainState.dead) {
       state = FainState.dead;
       print("DEAD");
+      time = Duration();
     }
   }
 }
