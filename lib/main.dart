@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     List<Widget> children = [];
 
     for (GameObject object in [
-      //...roadBlock,
+      ...roadBlock,
       fain
     ]) {
       children.add(AnimatedBuilder(
