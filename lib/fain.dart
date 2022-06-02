@@ -78,6 +78,7 @@ class Fain extends GameObject {
         break;
       case FainState.dead:
         currentAnimation = DEAD;
+        break;
     }
 
     currentSprite = animations[currentAnimation].getFrame(time!.inMilliseconds);
