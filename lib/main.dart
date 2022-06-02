@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   late AnimationController worldController;
   Duration? lastUpdateCall = Duration();
 
-  List<RoadBlock> roadBlock = [
+  List<RoadBlock> roadBlocks = [
     RoadBlock(worldLocation: Offset(200, 0))
   ];
 
@@ -49,12 +49,28 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     worldController.forward();
   }
 
+  void _die() {
+    setState(() {
+      worldController.stop();
+      fain.die();
+    });
+  }
+
   // called everytime AnimationController ticks
   _update() {
     fain.update(worldController.lastElapsedDuration! - lastUpdateCall!, worldController.lastElapsedDuration!);
     double elapsedTimeSeconds = (worldController.lastElapsedDuration! - lastUpdateCall!).inMilliseconds / 1000;
-
     runDistance += runVelocity * elapsedTimeSeconds;
+
+    Size screenSize = MediaQuery.of(context).size;
+    Rect fainRect = fain.getRect(screenSize, runDistance).deflate(5);
+    for (RoadBlock roadBlock in roadBlocks) {
+      Rect obstcaleRect = roadBlock.getRect(screenSize, runDistance).deflate(5);
+      if (fainRect.overlaps(obstcaleRect)) {
+        _die();
+      }
+    }
+
     lastUpdateCall = worldController.lastElapsedDuration;
   }
 
@@ -64,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     List<Widget> children = [];
 
     for (GameObject object in [
-      ...roadBlock,
+      ...roadBlocks,
       fain
     ]) {
       children.add(AnimatedBuilder(

@@ -7,11 +7,13 @@ import 'package:ourgame/animation.dart';
 enum FainState {
   jumping,
   running,
+  dead,
 }
 
 class Fain extends GameObject {
   final int RUN = 0;
   final int JUMP = 1;
+  final int DEAD = 2;
 
   List<Animation2D> animations = [];
 
@@ -25,9 +27,11 @@ class Fain extends GameObject {
   Fain() {
     animations.add(Animation2D("assets/meow2/run/run", 1, 4, 96, 96));
     animations.add(Animation2D("assets/meow2/jump/jump", 3, 7, 96, 96));
+    animations.add(Animation2D("assets/meow2/die/die", 1, 5, 96, 96));
 
     animations[RUN].loop = true;
     animations[JUMP].loop = false;
+    animations[DEAD].loop = false;
     animations[JUMP].speed = 0.75;
 
     currentSprite = animations[RUN].getFrame(0);
@@ -72,6 +76,8 @@ class Fain extends GameObject {
       case FainState.jumping:
         currentAnimation = JUMP;
         break;
+      case FainState.dead:
+        currentAnimation = DEAD;
     }
 
     currentSprite = animations[currentAnimation].getFrame(time!.inMilliseconds);
@@ -84,6 +90,13 @@ class Fain extends GameObject {
 
       velY = 600;
       time = Duration();
+    }
+  }
+
+  void die() {
+    if (state != FainState.dead) {
+      state = FainState.dead;
+      print("DEAD");
     }
   }
 }
