@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
   Fain fain = Fain();
   double runDistance = 0;
+  double runVelocity = 30;
 
   late AnimationController worldController;
   Duration? lastUpdateCall = Duration();
@@ -51,6 +52,8 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   // called everytime AnimationController ticks
   _update() {
     fain.update(worldController.lastElapsedDuration! - lastUpdateCall!, worldController.lastElapsedDuration!);
+    double elapsedTimeSeconds = (worldController.lastElapsedDuration - lastUpdateCall!).inMilliseconds / 1000;
+
     lastUpdateCall = worldController.lastElapsedDuration;
   }
 
