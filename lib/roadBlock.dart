@@ -6,7 +6,7 @@ import 'package:ourgame/sprite.dart';
 import "dart:math";
 
 class RoadBlock extends GameObject {
-  final int ROADBLOCK = 3;
+  final int RUN = 0;
 
   List<Animation2D> animation = [];
 
@@ -15,7 +15,7 @@ class RoadBlock extends GameObject {
 
   RoadBlock({this.worldLocation}) {
     animation.add(Animation2D("assets/meow2/run/run", 1, 4, 96, 96));
-    sprite = animation[ROADBLOCK].getFrame(Random().nextInt(animation.length));
+    sprite = animation[RUN].getFrame(Random().nextInt(animation.length));
   }
 
   @override
