@@ -5,8 +5,7 @@ class Animation2D {
 
   Animation2D(String path, int start, int length, int width, int height) {
     for (int i = start; i <= length + start - 1; i++) {
-      frames.add(Sprite()
-        ..imagePath = "$path$i.png"
+      frames.add(Sprite("$path$i.png")
         ..imageWidth = width
         ..imageHeight = height);
     }
