@@ -54,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     fain.update(worldController.lastElapsedDuration! - lastUpdateCall!, worldController.lastElapsedDuration!);
     double elapsedTimeSeconds = (worldController.lastElapsedDuration! - lastUpdateCall!).inMilliseconds / 1000;
 
+    runDistance += runVelocity * elapsedTimeSeconds;
     lastUpdateCall = worldController.lastElapsedDuration;
   }
 
