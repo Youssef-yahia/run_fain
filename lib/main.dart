@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   double runVelocity = 30;
 
   late AnimationController worldController;
-  Duration lastUpdateCall = Duration();
+  Duration? lastUpdateCall = Duration();
 
   List<RoadBlock> roadBlock = [
     RoadBlock(worldLocation: Offset(200, 0))
@@ -52,9 +52,9 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   // called everytime AnimationController ticks
   _update() {
     fain.update(worldController.lastElapsedDuration! - lastUpdateCall!, worldController.lastElapsedDuration!);
-    double elapsedTimeSeconds = (worldController.lastElapsedDuration - lastUpdateCall).inMilliseconds / 1000;
+    double elapsedTimeSeconds = (worldController.lastElapsedDuration! - lastUpdateCall!).inMilliseconds / 1000;
 
-    lastUpdateCall = worldController.lastElapsedDuration!;
+    lastUpdateCall = worldController.lastElapsedDuration;
   }
 
   @override
