@@ -36,9 +36,9 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   late AnimationController worldController;
   Duration? lastUpdateCall = Duration();
 
-  List<RoadBlock> roadBlock = [
-    RoadBlock(worldLocation: Offset(200, 0))
-  ];
+  // List<RoadBlock> roadBlock = [
+  //   RoadBlock(worldLocation: Offset(200, 0))
+  // ];
 
   @override
   void initState() {
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     List<Widget> children = [];
 
     for (GameObject object in [
-      ...roadBlock,
+      //...roadBlock,
       fain
     ]) {
       children.add(AnimatedBuilder(
