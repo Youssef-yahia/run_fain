@@ -39,11 +39,7 @@ class Fain extends GameObject {
   }
 
   Rect getRect(Size screenSize, double runDistance) {
-    return Rect.fromLTWH(
-        screenSize.width / 10,
-        screenSize.height / 2 - currentSprite!.imageHeight - dispY,
-        currentSprite!.imageWidth.toDouble(),
-        currentSprite!.imageHeight.toDouble());
+    return Rect.fromLTWH(screenSize.width / 10, screenSize.height / 2 - currentSprite!.imageHeight - dispY, currentSprite!.imageWidth.toDouble(), currentSprite!.imageHeight.toDouble());
   }
 
   @override
