@@ -51,8 +51,8 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
   void _die() {
     setState(() {
-      worldController.stop();
       fain.die();
+      worldController.stop();
     });
   }
 
