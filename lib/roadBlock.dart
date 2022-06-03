@@ -20,7 +20,7 @@ class RoadBlock extends GameObject {
   Collider? collider;
 
   RoadBlock({this.worldLocation}) {
-    animation.add(Animation2D("assets/tiles/sprite", 1, 4, 48, 48));
+    animation.add(Animation2D("assets/tiles/spikes", 1, 1, 48, 48));
     sprite = animation[ROADBLOCK].getFrame(Random().nextInt(animation.length));
 
     collider = Collider(Rect.fromLTWH(32, 48, 32, 32));
