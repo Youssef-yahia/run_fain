@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:ourgame/fain.dart';
 import 'package:ourgame/game_object.dart';
@@ -30,8 +32,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
   Fain fain = Fain();
   double runDistance = 0;
   double runVelocity = 30;
@@ -40,47 +41,43 @@ class _MyHomePageState extends State<MyHomePage>
   Duration? lastUpdateCall = Duration();
 
   List<RoadBlock> roadBlocks = [
-    RoadBlock(worldLocation: Offset(200, 0)),
-    RoadBlock2(worldLocation: Offset(100, 0))
+    RoadBlock(worldLocation: Offset(200, 0))
   ];
 
   @override
   void initState() {
     super.initState();
-    worldController =
-        AnimationController(vsync: this, duration: Duration(days: 99));
+    worldController = AnimationController(vsync: this, duration: Duration(days: 99));
     worldController.addListener(_update);
     worldController.forward();
   }
 
   void _die() {
     setState(() {
-      fain.die();
-      //worldController.stop();
+      fain.die(); //worldController.stop();
     });
   }
 
   // called everytime AnimationController ticks
   _update() {
-    fain.update(worldController.lastElapsedDuration! - lastUpdateCall!,
-        worldController.lastElapsedDuration!);
-    double elapsedTimeSeconds =
-        (worldController.lastElapsedDuration! - lastUpdateCall!)
-                .inMilliseconds /
-            1000;
+    fain.update(worldController.lastElapsedDuration! - lastUpdateCall!, worldController.lastElapsedDuration!);
+    double elapsedTimeSeconds = (worldController.lastElapsedDuration! - lastUpdateCall!).inMilliseconds / 1000;
     if (fain.state != FainState.dead) {
       runDistance += runVelocity * elapsedTimeSeconds;
     }
     Size screenSize = MediaQuery.of(context).size;
-    Rect fainColRect = fain.collider!
-        .getRect(fain.getRect(screenSize, runDistance))
-        .deflate(5);
+    Rect fainColRect = fain.collider!.getRect(fain.getRect(screenSize, runDistance)).deflate(5);
     for (RoadBlock roadBlock in roadBlocks) {
-      Rect obstcaleRect = roadBlock.collider!
-          .getRect(roadBlock.getRect(screenSize, runDistance))
-          .deflate(5);
-      if (fainColRect.overlaps(obstcaleRect)) {
+      Rect obstcaleRect = roadBlock.collider!.getRect(roadBlock.getRect(screenSize, runDistance));
+      if (fainColRect.overlaps(obstcaleRect.deflate(5))) {
         _die();
+      }
+
+      if (obstcaleRect.right < 0) {
+        setState(() {
+          roadBlocks.remove(roadBlock);
+          roadBlocks.add(RoadBlock(worldLocation: Offset(runDistance + Random().nextInt(100) + 50, 0)));
+        });
       }
     }
 
@@ -92,7 +89,10 @@ class _MyHomePageState extends State<MyHomePage>
     Size screenSize = MediaQuery.of(context).size;
     List<Widget> children = [];
 
-    for (GameObject object in [...roadBlocks, fain]) {
+    for (GameObject object in [
+      ...roadBlocks,
+      fain
+    ]) {
       children.add(AnimatedBuilder(
           animation: worldController,
           builder: (context, _) {
