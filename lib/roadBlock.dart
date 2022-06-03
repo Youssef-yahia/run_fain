@@ -23,7 +23,7 @@ class RoadBlock extends GameObject {
     animation.add(Animation2D("assets/tiles/spikes", 1, 1, 48, 48));
     sprite = animation[ROADBLOCK].getFrame(Random().nextInt(animation.length));
 
-    collider = Collider(Rect.fromLTWH(32, 48, 32, 32));
+    collider = Collider(Rect.fromLTWH(0, 0, 48, 48));
   }
 
   @override

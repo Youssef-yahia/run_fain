@@ -41,7 +41,7 @@ class Fain extends GameObject {
 
     currentSprite = animations[RUN].getFrame(0);
 
-    collider = Collider(Rect.fromLTWH(32, 48, 32, 32));
+    collider = Collider(Rect.fromLTWH(32, 80, 32, 32));
   }
 
   @override
@@ -93,7 +93,7 @@ class Fain extends GameObject {
         collider!.setRect(Rect.fromLTRB(0, 0, 0, 0));
         break;
       default:
-        collider = Collider(Rect.fromLTWH(32, 48, 32, 32));
+        collider = Collider(Rect.fromLTWH(32, 64, 32, 32));
         break;
     }
   }
