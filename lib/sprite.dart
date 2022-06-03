@@ -10,4 +10,9 @@ class Sprite {
     imagePath = path;
     image = Image.asset(imagePath);
   }
+
+  void setSize(int width, int height) {
+    imageWidth = width;
+    imageHeight = height;
+  }
 }

@@ -41,7 +41,7 @@ class RoadBlock extends GameObject {
   Widget render() {
     return Stack(
       children: [
-        collider!.render(),
+        //collider!.render(),
         Image.asset(sprite!.imagePath),
       ],
     );

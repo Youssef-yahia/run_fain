@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:ourgame/constants.dart';
 import 'package:ourgame/fain.dart';
 import 'package:ourgame/game_object.dart';
 import 'package:ourgame/roadBlock.dart';
 import 'package:ourgame/roadblock2.dart';
+import 'package:ourgame/tile.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,24 +34,39 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   Fain fain = Fain();
   double runDistance = 0;
   double runVelocity = 30;
+  double limitVelocity = 60;
 
   late AnimationController worldController;
   Duration? lastUpdateCall = Duration();
 
   List<RoadBlock> roadBlocks = [
-    RoadBlock(worldLocation: Offset(200, 0))
+    RoadBlock(
+      worldLocation: Offset(200, 0),
+    )
   ];
+
+  List<Tile> tiles = [];
 
   @override
   void initState() {
     super.initState();
-    worldController = AnimationController(vsync: this, duration: Duration(days: 99));
+    worldController =
+        AnimationController(vsync: this, duration: Duration(days: 99));
     worldController.addListener(_update);
     worldController.forward();
+
+    for (int y = 0; y < TILE_MAP.length; y++) {
+      for (int x = 0; x < TILE_MAP[y].length; x++) {
+        tiles.add(Tile(
+            absoluteLocation: Offset(x.toDouble(), y.toDouble()),
+            tileType: TILE_MAP[y][x]));
+      }
+    }
   }
 
   void _die() {
@@ -60,15 +77,26 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
   // called everytime AnimationController ticks
   _update() {
-    fain.update(worldController.lastElapsedDuration! - lastUpdateCall!, worldController.lastElapsedDuration!);
-    double elapsedTimeSeconds = (worldController.lastElapsedDuration! - lastUpdateCall!).inMilliseconds / 1000;
+    fain.update(worldController.lastElapsedDuration! - lastUpdateCall!,
+        worldController.lastElapsedDuration!);
+    double elapsedTimeSeconds =
+        (worldController.lastElapsedDuration! - lastUpdateCall!)
+                .inMilliseconds /
+            1000;
     if (fain.state != FainState.dead) {
       runDistance += runVelocity * elapsedTimeSeconds;
     }
+
+    runVelocity += elapsedTimeSeconds;
+    if (runVelocity > limitVelocity) runVelocity = limitVelocity;
+
     Size screenSize = MediaQuery.of(context).size;
-    Rect fainColRect = fain.collider!.getRect(fain.getRect(screenSize, runDistance)).deflate(5);
+    Rect fainColRect = fain.collider!
+        .getRect(fain.getRect(screenSize, runDistance))
+        .deflate(5);
     for (RoadBlock roadBlock in roadBlocks) {
-      Rect obstcaleRect = roadBlock.collider!.getRect(roadBlock.getRect(screenSize, runDistance));
+      Rect obstcaleRect = roadBlock.collider!
+          .getRect(roadBlock.getRect(screenSize, runDistance));
       if (fainColRect.overlaps(obstcaleRect.deflate(5))) {
         _die();
       }
@@ -76,8 +104,22 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
       if (obstcaleRect.right < 0) {
         setState(() {
           roadBlocks.remove(roadBlock);
-          roadBlocks.add(RoadBlock(worldLocation: Offset(runDistance + Random().nextInt(100) + 50, 0)));
+          roadBlocks.add(RoadBlock(
+              worldLocation: Offset(
+                  runDistance + Random().nextInt(100) + runVelocity, 0)));
         });
+      }
+    }
+
+    for (Tile tile in tiles) {
+      Rect rect = tile.getRect(screenSize, runDistance);
+      if (rect.right < 0) {
+        tile.worldLocation = Offset(
+            tile.worldLocation!.dx +
+                rect.width * TILE_MAP[0].length / WORLD_TO_PIXEL_RATIO,
+            tile.worldLocation!.dy);
+        tile.refresh();
+        //print("tile out of bounds:" + tile.worldLocation!.dx.toString());
       }
     }
 
@@ -88,11 +130,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     List<Widget> children = [];
-
-    for (GameObject object in [
-      ...roadBlocks,
-      fain
-    ]) {
+    for (GameObject object in [...tiles, ...roadBlocks, fain]) {
       children.add(AnimatedBuilder(
           animation: worldController,
           builder: (context, _) {

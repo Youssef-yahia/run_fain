@@ -30,6 +30,8 @@ class Fain extends GameObject {
   Duration? time = Duration();
 
   Fain() {
+    //state = FainState.dead;
+
     animations.add(Animation2D("assets/meow2/run/run", 1, 4, 96, 96));
     animations.add(Animation2D("assets/meow2/jump/jump", 3, 7, 96, 96));
     animations.add(Animation2D("assets/meow2/die/die", 1, 5, 96, 96));
@@ -48,7 +50,7 @@ class Fain extends GameObject {
   Widget render() {
     return Stack(
       children: [
-        collider!.render(),
+        //collider!.render(),
         currentSprite!.image,
       ],
     );
@@ -57,7 +59,7 @@ class Fain extends GameObject {
 
   Rect getRect(Size screenSize, double runDistance) {
     _rect = Rect.fromLTWH(
-        screenSize.width / 10,
+        screenSize.width * 0.02,
         screenSize.height / 2 - currentSprite!.imageHeight - dispY,
         currentSprite!.imageWidth.toDouble(),
         currentSprite!.imageHeight.toDouble());
