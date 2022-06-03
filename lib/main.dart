@@ -41,8 +41,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   Duration? lastUpdateCall = Duration();
 
   List<RoadBlock> roadBlocks = [
-    RoadBlock(worldLocation: Offset(200, 0)),
-    RoadBlock2(worldLocation: Offset(100, 0))
+    RoadBlock(worldLocation: Offset(200, 0))
   ];
 
   @override
