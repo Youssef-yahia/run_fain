@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
     if (fain.state != FainState.dead) {
       runDistance += runVelocity * elapsedTimeSeconds;
-      score += elapsedTimeSeconds;
+      score = runDistance;
       print(score);
     }
     runVelocity += elapsedTimeSeconds;
@@ -155,7 +155,15 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
             AnimatedBuilder(
                 animation: worldController,
                 builder: (context, _) {
-                  return Positioned(left: 200, top: 50, width: 50, height: 50, child: Text(score.toInt().toString()));
+                  return Positioned(
+                      left: 200,
+                      top: 50,
+                      width: 50,
+                      height: 50,
+                      child: Text(
+                        score.toInt().toString(),
+                        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.red[600]),
+                      ));
                 }),
           ],
         )
