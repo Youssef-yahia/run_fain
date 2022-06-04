@@ -1,13 +1,21 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:ourgame/tile.dart';
 
 const int GRAVITY_PPSS = 2000;
 const int WORLD_TO_PIXEL_RATIO = 10;
 
-const List<List<TileType>> TILE_MAP = [
-  [TileType.Grass, TileType.Grass, TileType.Grass,TileType.Grass, TileType.Grass, TileType.Grass,TileType.Grass, TileType.Grass, TileType.Grass,TileType.Grass, TileType.Grass, TileType.Grass,TileType.Grass, TileType.Grass, TileType.Grass,TileType.Grass, TileType.Grass, TileType.Grass,],
-  [TileType.Surface, TileType.Surface, TileType.Surface,TileType.Surface, TileType.Surface, TileType.Surface,TileType.Surface, TileType.Surface, TileType.Surface,TileType.Surface, TileType.Surface, TileType.Surface,TileType.Surface, TileType.Surface, TileType.Surface,TileType.Surface, TileType.Surface, TileType.Surface,],
-  [TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep,TileType.Deep,   TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep,],
-  [TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep,TileType.Deep,   TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep,],
-  [TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep,TileType.Deep,   TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep,],
-  [TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep,TileType.Deep,   TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep, TileType.Deep,],
-];
+const TextStyle STYLE_REGULAR = TextStyle(
+  color: Colors.white,
+  fontFamily: "Arcade",
+  decoration: TextDecoration.none,
+  fontSize: 32,
+);
+const TextStyle STYLE_TITLE = TextStyle(
+  color: Colors.white,
+  fontFamily: "Arcade",
+  decoration: TextDecoration.none,
+  fontSize: 64,
+);
+
+List<int> SCORES = [];

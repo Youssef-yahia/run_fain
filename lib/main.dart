@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:ourgame/constants.dart';
 import 'package:ourgame/fain.dart';
 import 'package:ourgame/game_object.dart';
+import 'package:ourgame/map.dart';
+import 'package:ourgame/pages/mainmenu.dart';
 import 'package:ourgame/roadBlock.dart';
 import 'package:ourgame/roadblock2.dart';
 import 'package:ourgame/tile.dart';
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Dodge Game Home Page'),
+      home: MainMenuPage(),
     );
   }
 }
