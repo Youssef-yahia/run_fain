@@ -79,8 +79,6 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
     if (fain.state != FainState.dead) {
       runDistance += runVelocity * elapsedTimeSeconds;
-      score += elapsedTimeSeconds;
-      print(score);
     }
     runVelocity += elapsedTimeSeconds;
     if (runVelocity > limitVelocity) runVelocity = limitVelocity;
@@ -152,9 +150,11 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                 children: children,
               ),
             ),
-            Center(
-              child: Text(score.toInt().toString()),
-            ),
+            AnimatedBuilder(
+                animation: worldController,
+                builder: (context, _) {
+                  return Center(child: Text(score.toInt().toString()));
+                }),
           ],
         )
         // This trailing comma makes auto-formatting nicer for build methods.
