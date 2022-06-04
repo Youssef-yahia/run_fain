@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage>
   ];
   List<Hills> hills = [
     Hills(worldLocation: Offset(0, 0)),
-    Hills(worldLocation: Offset((480.0 / WORLD_TO_PIXEL_RATIO).toDouble(), 0))
+    Hills(worldLocation: Offset((1278.0 / WORLD_TO_PIXEL_RATIO).toDouble(), 0))
   ];
   Fain fain = Fain();
   double runDistance = 0;
