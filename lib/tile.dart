@@ -67,7 +67,7 @@ class Tile extends GameObject {
     _rect = Rect.fromLTWH(
       (worldLocation!.dx - runDistance) * WORLD_TO_PIXEL_RATIO +
           absoluteLocation!.dx * sprite!.imageWidth,
-      screenSize.height / 2 -
+      screenSize.height * 0.65 -
           sprite!.imageHeight +
           absoluteLocation!.dy * sprite!.imageHeight,
       sprite!.imageWidth.toDouble(),

@@ -30,7 +30,7 @@ class RoadBlock extends GameObject {
   Rect getRect(Size screenSize, double runDistance) {
     _rect = Rect.fromLTWH(
       (worldLocation!.dx - runDistance) * WORLD_TO_PIXEL_RATIO,
-      screenSize.height / 2 - sprite!.imageHeight,
+      screenSize.height * 0.65 - sprite!.imageHeight,
       sprite!.imageWidth.toDouble(),
       sprite!.imageHeight.toDouble(),
     );

@@ -11,11 +11,17 @@ const TextStyle STYLE_REGULAR = TextStyle(
   decoration: TextDecoration.none,
   fontSize: 32,
 );
-const TextStyle STYLE_TITLE = TextStyle(
+const TextStyle STYLE_REGULAR2 = TextStyle(
   color: Colors.white,
   fontFamily: "Arcade",
   decoration: TextDecoration.none,
-  fontSize: 64,
+  fontSize: 48,
+);
+const TextStyle STYLE_TITLE = TextStyle(
+  color: Colors.white,
+  fontFamily: "Title",
+  decoration: TextDecoration.none,
+  fontSize: 28,
 );
 
 List<int> SCORES = [];

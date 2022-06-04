@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ourgame/audio/soundplayer.dart';
 import 'package:ourgame/collider.dart';
 import 'package:ourgame/constants.dart';
 import 'package:ourgame/game_object.dart';
@@ -60,7 +61,7 @@ class Fain extends GameObject {
   Rect getRect(Size screenSize, double runDistance) {
     _rect = Rect.fromLTWH(
         screenSize.width * 0.02,
-        screenSize.height / 2 - currentSprite!.imageHeight - dispY,
+        screenSize.height * 0.65 - currentSprite!.imageHeight - dispY,
         currentSprite!.imageWidth.toDouble(),
         currentSprite!.imageHeight.toDouble());
     return _rect!;
@@ -126,6 +127,8 @@ class Fain extends GameObject {
 
       velY = 600;
       time = Duration();
+
+      SoundPlayer.getInstance().playJump();
     }
   }
 
@@ -134,6 +137,8 @@ class Fain extends GameObject {
       state = FainState.dead;
       print("DEAD");
       time = Duration();
+
+      SoundPlayer.getInstance().playDie();
     }
   }
 }
