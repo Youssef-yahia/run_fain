@@ -80,6 +80,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     if (fain.state != FainState.dead) {
       runDistance += runVelocity * elapsedTimeSeconds;
       score += elapsedTimeSeconds.toInt();
+      print(score);
     }
     runVelocity += elapsedTimeSeconds;
     if (runVelocity > limitVelocity) runVelocity = limitVelocity;
