@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   double runDistance = 0;
   double runVelocity = 30;
   double limitVelocity = 60;
-  int score = 0;
+  double score = 0;
 
   late AnimationController worldController;
   Duration? lastUpdateCall = Duration();
@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
     if (fain.state != FainState.dead) {
       runDistance += runVelocity * elapsedTimeSeconds;
-      score += elapsedTimeSeconds.toInt();
+      score += elapsedTimeSeconds;
       print(score);
     }
     runVelocity += elapsedTimeSeconds;
@@ -153,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
               ),
             ),
             Center(
-              child: Text(score.toString()),
+              child: Text(score.toInt().toString()),
             ),
           ],
         )
