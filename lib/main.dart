@@ -155,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
             AnimatedBuilder(
                 animation: worldController,
                 builder: (context, _) {
-                  return Positioned(left: 50, top: 50, width: 50, height: 50, child: Text(score.toInt().toString()));
+                  return Positioned(left: 300, top: 50, width: 50, height: 50, child: Text(score.toInt().toString()));
                 }),
           ],
         )
