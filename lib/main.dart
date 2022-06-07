@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage>
   Fain fain = Fain();
   double runDistance = 0;
   double runVelocity = 30;
-  double limitVelocity = 60;
+  double limitVelocity = 90;
   double score = 0;
 
   late AnimationController worldController;
@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage>
       score = runDistance;
       print(score);
     }
-    runVelocity += elapsedTimeSeconds;
+    runVelocity += elapsedTimeSeconds * 0.75;
     if (runVelocity > limitVelocity) runVelocity = limitVelocity;
 
     Size screenSize = MediaQuery.of(context).size;
